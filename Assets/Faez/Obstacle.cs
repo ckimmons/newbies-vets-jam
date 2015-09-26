@@ -18,6 +18,11 @@ public class Obstacle : MonoBehaviour {
             gameObject.layer = (int)PlayerMovement.gameLayers.white;
             GetComponent<Renderer>().material.color = controller.whiteColor;
         }
+        else if(collisionColor == PlayerMovement.playerState.gray)
+        {
+            gameObject.layer = (int)PlayerMovement.gameLayers.gray;
+            GetComponent<Renderer>().material.color = Color.gray;
+        }
 	}   
 
     void OnValidate()

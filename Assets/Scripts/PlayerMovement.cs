@@ -6,11 +6,13 @@ public class PlayerMovement : MonoBehaviour {
     public enum playerState
     {
         black,
-        white
+        white,
+        gray
     }
 
     public enum gameLayers
     {
+        gray = 1,
         black = 8,
         white = 9,
         blackPlayer = 10,

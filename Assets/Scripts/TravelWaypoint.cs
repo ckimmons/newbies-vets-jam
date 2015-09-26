@@ -126,12 +126,12 @@ public class TravelWaypoint : MonoBehaviour {
 	void Update () {
         if (active)
         {
-            foreach (junction j in junctions)
+            for (int k=0;k < junctions.Count; k++)
             {
+                junction j = junctions[k];
                 float distance = Vector2.Distance(player.transform.position, j.junctionPosition);
                 if (distance < threshold)
                 {
-                    Debug.Log("juncture");
                     if (j.junctionWaypoint.trailType == PlayerMovement.currentState)
                     {
                         player.setCurrentWaypoint(j.junctionWaypoint);
