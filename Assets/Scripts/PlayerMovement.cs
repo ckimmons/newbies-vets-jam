@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public static playerState currentState = playerState.black;
+    public GameObject wonObject;
 
     public float slowMovementSpeed;
     public float normalMovementSpeed;
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour {
     void moveTowardsWaypoint()
     {
         transform.position = Vector2.MoveTowards(transform.position, targetWaypoint.transform.position, movementSpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, targetWaypoint.transform.position) == 0)
+        if (Vector2.Distance(transform.position, targetWaypoint.transform.position) < .2f)
         {
             targetWaypoint = targetWaypoint.next;
             if (targetWaypoint == null)
@@ -130,5 +131,6 @@ public class PlayerMovement : MonoBehaviour {
     void playerWon()
     {
         won = true;
+        Instantiate(wonObject, transform.position, Quaternion.identity);
     }
 }
