@@ -1,10 +1,23 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+guid: fbd9814fb79a84629af12ec6935963b6
+timeCreated: 1443304642
+=======
 <<<<<<< HEAD
 guid: e407cf1b11be1664e994be051d010459
 timeCreated: 1443304872
 =======
 guid: b9a549a193c10464998082a4e90ba482
 timeCreated: 1443304302
+>>>>>>> origin/master
+<<<<<<< HEAD
+=======
+guid: 43b72fc64641449768d34c240634fe10
+timeCreated: 1443304362
+>>>>>>> Stashed changes
+=======
+>>>>>>> origin/master
 >>>>>>> origin/master
 licenseType: Free
 DefaultImporter:
