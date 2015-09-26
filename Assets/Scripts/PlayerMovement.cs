@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour {
     public enum gameLayers
     {
         black = 8,
-        white = 9
+        white = 9,
+        blackPlayer = 10,
+        whitePlayer = 11
     }
 
     public static playerState currentState = playerState.black;
@@ -104,11 +106,11 @@ public class PlayerMovement : MonoBehaviour {
     {
         if(currentState == playerState.black)
         {
-            gameObject.layer = (int)gameLayers.black;
+            gameObject.layer = (int)gameLayers.blackPlayer;
             mat.color = controller.blackColor;
         }
         else if(currentState == playerState.white) {
-            gameObject.layer = (int)gameLayers.white;
+            gameObject.layer = (int)gameLayers.whitePlayer;
             mat.color = controller.whiteColor;
         }
     }

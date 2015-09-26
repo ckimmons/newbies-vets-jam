@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using System.Collections;
 
+
 public class TravelWaypoint : MonoBehaviour {
+
+    struct junction{
+        public Vector3 junctionPosition;
+        public TravelWaypoint junctionWaypoint;
+    }
 
     private static float threshold = .1f;
     private static float trailWidth = .1f;
@@ -13,9 +19,7 @@ public class TravelWaypoint : MonoBehaviour {
     public Color lineCol;
     public bool active = false;
 
-    private bool hasJunction;
-    private Vector3 junctionPosition;
-    private TravelWaypoint junctionWaypoint;
+    List<junction> junctions = new List<junction>();
     private PlayerMovement player;
 
     void OnDrawGizmos()
@@ -46,6 +50,7 @@ public class TravelWaypoint : MonoBehaviour {
     }
 
     void Awake () {
+
         if (next != null)
         {
             EdgeCollider2D col = GetComponent<EdgeCollider2D>();
@@ -72,35 +77,69 @@ public class TravelWaypoint : MonoBehaviour {
         }
     }
 
+    int getLayerMask()
+    {
+        if(trailType == PlayerMovement.playerState.black)
+        {
+            return (int)PlayerMovement.gameLayers.white;
+        }
+        if(trailType == PlayerMovement.playerState.white)
+        {
+            return (int)PlayerMovement.playerState.black;
+        }
+        return -1;
+    }
+
+    int getLayer()
+    {
+        if (trailType == PlayerMovement.playerState.black)
+        {
+            return (int)PlayerMovement.gameLayers.black;
+        }
+        if (trailType == PlayerMovement.playerState.white)
+        {
+            return (int)PlayerMovement.playerState.white;
+        }
+        return -1;
+    }
+
     void Start()
     {
         player = GameObject.FindObjectOfType<PlayerMovement>();
         if (next != null)
         {
-            RaycastHit2D hit = Physics2D.Linecast(transform.position, next.transform.position);
-            if (hit)
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, next.transform.position,getLayerMask());
+            while(hit)
             {
-                hasJunction = true;
-                junctionPosition = hit.point;
-                junctionWaypoint = hit.collider.GetComponent<TravelWaypoint>();
+                Debug.Log(name + " " + hit.collider.name);
+                junction junct = new junction();
+                junct.junctionPosition = hit.point;
+                junct.junctionWaypoint = hit.collider.GetComponent<TravelWaypoint>();
+                junctions.Add(junct);
+                hit.collider.enabled = false;
+                hit = Physics2D.Linecast(transform.position, next.transform.position);
             }
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (hasJunction && active)
+        if (active)
         {
-            float distance = Vector2.Distance(player.transform.position, junctionPosition);
-            if(distance < threshold)
+            foreach (junction j in junctions)
             {
-                
-                if(junctionWaypoint.trailType == PlayerMovement.currentState)
+                float distance = Vector2.Distance(player.transform.position, j.junctionPosition);
+                if (distance < threshold)
                 {
-                    player.setCurrentWaypoint(junctionWaypoint);
+                    Debug.Log("juncture");
+                    if (j.junctionWaypoint.trailType == PlayerMovement.currentState)
+                    {
+                        player.setCurrentWaypoint(j.junctionWaypoint);
+                    }
                 }
             }
         }
+        
 	}
 
  
