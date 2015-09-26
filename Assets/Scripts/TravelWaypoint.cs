@@ -23,6 +23,14 @@ public class TravelWaypoint : MonoBehaviour {
     {
         if (next != null)
         {
+            if(trailType == PlayerMovement.playerState.white)
+            {
+                Gizmos.color = Color.white;
+            }
+            else if(trailType == PlayerMovement.playerState.black)
+            {
+                Gizmos.color = Color.black;
+            }
             Gizmos.DrawLine(transform.position, next.transform.position);
         }
     }
