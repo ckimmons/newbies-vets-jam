@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
     void moveTowardsWaypoint()
     {
         transform.position = Vector2.MoveTowards(transform.position, targetWaypoint.transform.position, movementSpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, targetWaypoint.transform.position) == 0)
+        if (Vector2.Distance(transform.position, targetWaypoint.transform.position) < .1f)
         {
             targetWaypoint = targetWaypoint.next;
             if (targetWaypoint == null)
