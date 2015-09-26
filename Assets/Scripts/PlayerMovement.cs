@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void toggleState()
     {
-        Debug.Log("before" + currentState);
         if (currentState == playerState.black)
         {
             currentState = playerState.white;
