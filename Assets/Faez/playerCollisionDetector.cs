@@ -23,11 +23,14 @@ public class playerCollisionDetector: MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D (Collision2D Col) {
-		if (Col.gameObject.CompareTag ("obstacle"))
-			gameObject.SetActiveRecursively(false);
-			currentState = gameplayState.gameOver;
-			Instantiate (gameOverText, gameOverText.transform.position, Quaternion.identity);
-			Destroy (gameOverText,5);
+	void OnTriggerEnter2D (Collider2D Col) {
+        Debug.Log(Col.tag);
+        if (Col.gameObject.CompareTag("obstacle"))
+        {
+            gameObject.SetActiveRecursively(false);
+            currentState = gameplayState.gameOver;
+            GameObject instantiated = (GameObject)Instantiate(gameOverText, gameOverText.transform.position, Quaternion.identity);
+            Destroy(instantiated, 5);
+        }
 	}
 }

@@ -38,7 +38,11 @@ public class TravelWaypoint : MonoBehaviour {
             Gizmos.color = Color.gray;
         }
         Gizmos.DrawSphere(transform.position, .2f);
-
+        foreach(junction j in junctions)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(j.junctionPosition, .3f);
+        }
     }
 
     void OnValidate()
@@ -94,17 +98,19 @@ public class TravelWaypoint : MonoBehaviour {
     {
         if (trailType == PlayerMovement.playerState.black)
         {
+            
             return (int)PlayerMovement.gameLayers.black;
         }
         if (trailType == PlayerMovement.playerState.white)
         {
-            return (int)PlayerMovement.playerState.white;
+            return (int)PlayerMovement.gameLayers.white;
         }
         return -1;
     }
 
     void Start()
     {
+        List<Collider2D> disabledColliders = new List<Collider2D>();
         player = GameObject.FindObjectOfType<PlayerMovement>();
         if (next != null)
         {
@@ -112,20 +118,26 @@ public class TravelWaypoint : MonoBehaviour {
             Debug.DrawLine(transform.position, next.transform.position, Color.red,10);
             while (hit)
             {
-                Debug.Log(name + " " + hit.collider.name);
                 junction junct = new junction();
                 junct.junctionPosition = hit.point;
                 junct.junctionWaypoint = hit.collider.GetComponent<TravelWaypoint>();
                 junctions.Add(junct);
+                disabledColliders.Add(hit.collider);
+
                 hit.collider.enabled = false;
+                
                 hit = Physics2D.Linecast(transform.position, next.transform.position);
+            }
+           foreach(Collider2D col in disabledColliders)
+            {
+                col.enabled = true;
             }
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (active)
+        if (true)
         {
             for (int k=0;k < junctions.Count; k++)
             {
