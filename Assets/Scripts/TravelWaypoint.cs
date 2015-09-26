@@ -118,7 +118,6 @@ public class TravelWaypoint : MonoBehaviour {
             Debug.DrawLine(transform.position, next.transform.position, Color.red,10);
             while (hit)
             {
-                Debug.Log(name + " " + hit.collider.name);
                 junction junct = new junction();
                 junct.junctionPosition = hit.point;
                 junct.junctionWaypoint = hit.collider.GetComponent<TravelWaypoint>();
@@ -146,7 +145,6 @@ public class TravelWaypoint : MonoBehaviour {
                 float distance = Vector2.Distance(player.transform.position, j.junctionPosition);
                 if (distance < threshold)
                 {
-                    Debug.Log("juncture " + j.junctionWaypoint.name);
                     if (j.junctionWaypoint.trailType == PlayerMovement.currentState)
                     {
                         player.setCurrentWaypoint(j.junctionWaypoint);
