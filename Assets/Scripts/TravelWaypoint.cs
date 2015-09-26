@@ -68,7 +68,6 @@ public class TravelWaypoint : MonoBehaviour {
         if (next != null)
         {
             RaycastHit2D hit = Physics2D.Linecast(transform.position, next.transform.position);
-            
             if (hit)
             {
                 hasJunction = true;
@@ -93,4 +92,6 @@ public class TravelWaypoint : MonoBehaviour {
             }
         }
 	}
+
+ 
 }
