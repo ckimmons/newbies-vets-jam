@@ -50,7 +50,7 @@ public class TravelWaypoint : MonoBehaviour {
     }
 
     void Awake () {
-
+        gameObject.layer = getLayer();
         if (next != null)
         {
             EdgeCollider2D col = GetComponent<EdgeCollider2D>();
@@ -81,11 +81,11 @@ public class TravelWaypoint : MonoBehaviour {
     {
         if(trailType == PlayerMovement.playerState.black)
         {
-            return (int)PlayerMovement.gameLayers.white;
+            return 1<<9;
         }
         if(trailType == PlayerMovement.playerState.white)
         {
-            return (int)PlayerMovement.playerState.black;
+            return 1<<8;
         }
         return -1;
     }
@@ -109,7 +109,8 @@ public class TravelWaypoint : MonoBehaviour {
         if (next != null)
         {
             RaycastHit2D hit = Physics2D.Linecast(transform.position, next.transform.position,getLayerMask());
-            while(hit)
+            Debug.DrawLine(transform.position, next.transform.position, Color.red,10);
+            while (hit)
             {
                 Debug.Log(name + " " + hit.collider.name);
                 junction junct = new junction();
