@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour {
     public PlayerMovement.playerState collisionColor;
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
         ColorController controller = GameObject.FindObjectOfType<ColorController>();
         if (collisionColor == PlayerMovement.playerState.black)
         {

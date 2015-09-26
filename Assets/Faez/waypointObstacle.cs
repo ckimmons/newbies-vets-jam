@@ -12,6 +12,7 @@ public class waypointObstacle : Obstacle {
 
 	// Use this for initialization
 	void Start () {
+        base.Start();
 		lDistance = Vector2.Distance(start.transform.position, end.transform.position);
 	}
 	

@@ -17,7 +17,6 @@ public class TravelWaypoint : MonoBehaviour {
     private Vector3 junctionPosition;
     private TravelWaypoint junctionWaypoint;
     private PlayerMovement player;
-   
 
     void OnDrawGizmos()
     {
@@ -32,7 +31,10 @@ public class TravelWaypoint : MonoBehaviour {
                 Gizmos.color = Color.black;
             }
             Gizmos.DrawLine(transform.position, next.transform.position);
+            Gizmos.color = Color.gray;
         }
+        Gizmos.DrawSphere(transform.position, .2f);
+
     }
 
     void OnValidate()
@@ -92,7 +94,7 @@ public class TravelWaypoint : MonoBehaviour {
             float distance = Vector2.Distance(player.transform.position, junctionPosition);
             if(distance < threshold)
             {
-                Debug.Log("junction");
+                
                 if(junctionWaypoint.trailType == PlayerMovement.currentState)
                 {
                     player.setCurrentWaypoint(junctionWaypoint);
