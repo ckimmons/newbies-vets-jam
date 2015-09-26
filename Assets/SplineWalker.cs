@@ -4,7 +4,9 @@ public class SplineWalker : MonoBehaviour {
 
 	public BezierSpline spline;
 
-	public float duration;
+    public float speed;
+
+	private float duration;
 
 	public bool lookForward;
 
@@ -13,7 +15,12 @@ public class SplineWalker : MonoBehaviour {
 	private float progress;
 	private bool goingForward = true;
 
-	private void Update () {
+    void Start()
+    {
+        duration = spline.getLength() / speed;
+    }
+
+    private void Update () {
 		if (goingForward) {
 			progress += Time.deltaTime / duration;
 			if (progress > 1f) {
@@ -38,6 +45,7 @@ public class SplineWalker : MonoBehaviour {
 		}
 
 		Vector3 position = spline.GetPoint(progress);
+        
 		transform.localPosition = position;
 		if (lookForward) {
 			transform.LookAt(position + spline.GetDirection(progress));

@@ -4,13 +4,28 @@ using System;
 public class BezierSpline : MonoBehaviour {
 
 	[SerializeField]
-	private Vector3[] points;
+	public Vector3[] points;
 
 	[SerializeField]
 	private BezierControlPointMode[] modes;
 
 	[SerializeField]
 	private bool loop;
+
+    public float lengthAproximationIterations = 200;
+
+    private float length;
+    
+    void Awake()
+    {
+        for(int k = 0; k < lengthAproximationIterations-1; k++)
+        {
+            Vector3 startPoint = GetPoint(k / lengthAproximationIterations);
+            Vector3 endPoint = GetPoint((k + 1) / lengthAproximationIterations);
+            length += Vector3.Distance(startPoint, endPoint);
+        }
+        Debug.Log(length);
+    }
 
 	public bool Loop {
 		get {
@@ -30,6 +45,11 @@ public class BezierSpline : MonoBehaviour {
 			return points.Length;
 		}
 	}
+
+    public float getLength()
+    {
+        return length;
+    }
 
 	public Vector3 GetControlPoint (int index) {
 		return points[index];
