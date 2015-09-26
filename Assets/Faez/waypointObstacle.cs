@@ -21,15 +21,15 @@ public class waypointObstacle : Obstacle {
 		if (countUp == true) {
 			lProgress += Time.deltaTime * speed / lDistance;
 			if (lProgress > 1f) {
-				// If you really don't want the obstacle moving past its start and end points
-				//				lProgress = 1f;
+				//	If you really don't want the obstacle moving past its start and end points
+				//	lProgress = 1f;
 				countUp = false;
 			}
 		}
 		else {
 			lProgress -= Time.deltaTime * speed / lDistance;
 			if (lProgress < 0f) {
-//				lProgress = 0f;
+				//	lProgress = 0f;
 				countUp = true;
 			}
 	}
