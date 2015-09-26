@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class waypointObstacle : MonoBehaviour {
+public class waypointObstacle : Obstacle {
 	
 	public GameObject start;
 	public GameObject end;
